@@ -74,23 +74,27 @@ stages:
       runOnce:
         deploy:
           steps:
-    #      - task: AzureFunctionApp@1
-    #        displayName: 'Azure Functions App Deploy: jeusmenodedevops'
-    #        inputs:
-    #          azureSubscription: '$(azureSubscription)'
-    #          appType: functionAppLinux
-    #          appName: $(functionAppName)
-    #          package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-        
-          - task: AzureRmWebAppDeployment@4
+          - task: AzureFunctionApp@1
             displayName: 'Azure Functions App Deploy: jeusmenodedevops'
             inputs:
               azureSubscription: '$(azureSubscription)'
-              appType: 'functionApp'
-              WebAppName: 'jeusmenodedevops'
+              appType: functionAppLinux
+              appName: $(functionAppName)
               deployToSlotOrASE: true
               ResourceGroupName: 'jesumePyFuncDevOps'
-              SlotName: 'staging'
-              packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
-              enableCustomDeployment: true
-              DeploymentType: 'runFromZip'
+              SlotName: 'stg'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              deploymentMethod: runFromPackage
+        
+         # - task: AzureRmWebAppDeployment@4
+          #  displayName: 'Azure Functions App Deploy: jeusmenodedevops'
+           # inputs:
+            #  azureSubscription: '$(azureSubscription)'
+             # appType: 'functionApp'
+              #WebAppName: 'jeusmenodedevops'
+              #deployToSlotOrASE: true
+              #ResourceGroupName: 'jesumePyFuncDevOps'
+              #SlotName: 'staging'
+              #packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              #enableCustomDeployment: true
+              #DeploymentType: 'runFromZip'
