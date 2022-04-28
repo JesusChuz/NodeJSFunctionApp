@@ -12,7 +12,7 @@ variables:
   azureSubscription: '0e6b26b6-1e16-4dad-863b-7aaa28ea2438'
 
   # Function app name
-  functionAppName: 'jesumepyfuncdevops'
+  functionAppName: 'jeusmenodedevops'
 
   # Environment name
   environmentName: 'jesumepyfuncdevops'
@@ -59,3 +59,15 @@ stages:
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'MAIC - TEK Experts CR - v-gengon Group#2 (bddf3c59-769c-49a7-a515-6310ce264e6a)'
+        appType: 'functionApp'
+        WebAppName: 'jeusmenodedevops'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'jesumePyFuncDevOps'
+        SlotName: 'staging'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        enableCustomDeployment: true
+        DeploymentType: 'runFromZip'
